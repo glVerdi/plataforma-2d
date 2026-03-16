@@ -1,50 +1,60 @@
-[gd_scene format=3 uid="uid://dwfu2hd278el"]
+[gd_scene format=4 uid="uid://dwfu2hd278el"]
 
 [ext_resource type="PackedScene" uid="uid://doc61wlw1ucb7" path="res://entities/player.tscn" id="1_5kiuu"]
+[ext_resource type="Texture2D" uid="uid://dpo48chd8w2c" path="res://sprites/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="2_dbls1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5kiuu"]
-size = Vector2(108.5, 34)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_33cqm"]
+texture = ExtResource("2_dbls1")
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+11:1/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+11:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+15:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+11:4/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+11:5/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+4:8/0 = 0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dbls1"]
-size = Vector2(70.25, 34)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_33cqm"]
-size = Vector2(70.25, 15)
+[sub_resource type="TileSet" id="TileSet_xwcet"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_33cqm")
 
 [node name="Game" type="Node2D" unique_id=2000257416]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1347310084]
-position = Vector2(101, -88)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1676083487]
-position = Vector2(-56.25, 282)
-shape = SubResource("RectangleShape2D_5kiuu")
-debug_color = Color(1.540184e-06, 0.6494064, 0.20861083, 0.41960785)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1066363413]
-position = Vector2(51, 288)
-shape = SubResource("RectangleShape2D_dbls1")
-debug_color = Color(1.540184e-06, 0.6494064, 0.20861083, 0.41960785)
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1196751708]
-position = Vector2(137, 262)
-shape = SubResource("RectangleShape2D_dbls1")
-debug_color = Color(1.540184e-06, 0.6494064, 0.20861083, 0.41960785)
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=997407656]
-position = Vector2(201, 219)
-shape = SubResource("RectangleShape2D_33cqm")
-debug_color = Color(1.540184e-06, 0.6494064, 0.20861083, 0.41960785)
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D" unique_id=350973328]
-position = Vector2(276, 193)
-shape = SubResource("RectangleShape2D_33cqm")
-debug_color = Color(1.540184e-06, 0.6494064, 0.20861083, 0.41960785)
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D" unique_id=1110327576]
-position = Vector2(355, 167)
-shape = SubResource("RectangleShape2D_33cqm")
-debug_color = Color(1.540184e-06, 0.6494064, 0.20861083, 0.41960785)
-
 [node name="Player" parent="." unique_id=302443006 instance=ExtResource("1_5kiuu")]
 position = Vector2(9, 162)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1731491142]
+tile_map_data = PackedByteArray("AAAAAAsAAAADAAEAAAABAAsAAAAEAAEAAAACAAsAAAAEAAEAAAADAAsAAAAEAAEAAAAEAAsAAAAEAAEAAAAFAAsAAAAEAAEAAAAGAAsAAAAEAAEAAAAHAAoAAAADAAEAAAAIAAoAAAAEAAEAAAAJAAoAAAAEAAEAAAAKAAoAAAAEAAEAAAALAAkAAAADAAEAAAAMAAkAAAAEAAEAAAANAAkAAAAEAAEAAAAOAAkAAAAEAAEAAAAPAAgAAAADAAEAAAAQAAgAAAAEAAEAAAARAAgAAAAEAAEAAAASAAgAAAAEAAEAAAATAAgAAAAEAAEAAAAUAAgAAAAEAAEAAAAVAAgAAAAFAAEAAAAVAAkAAAAFAAIAAAAVAAoAAAAFAAIAAAAVAAsAAAAFAAIAAAAVAAwAAAAFAAIAAAAVAA0AAAAFAAIAAAAVAA4AAAAFAAIAAAAAAAwAAAADAAIAAAAAAA0AAAADAAIAAAAAAA4AAAADAAIAAAABAA4AAAAEAAIAAAACAA4AAAAEAAIAAAADAA4AAAAEAAIAAAAEAA4AAAAEAAIAAAAFAA4AAAAEAAIAAAAGAA4AAAAEAAIAAAAHAA4AAAAEAAIAAAAIAA4AAAAEAAIAAAAJAA4AAAAEAAIAAAAKAA4AAAAEAAIAAAALAA4AAAAEAAIAAAAMAA4AAAAEAAIAAAANAA4AAAAEAAIAAAAOAA4AAAAEAAIAAAAPAA4AAAAEAAIAAAAQAA4AAAAEAAIAAAARAA4AAAAEAAIAAAASAA4AAAAEAAIAAAATAA4AAAAEAAIAAAAUAA4AAAAEAAIAAAALAAwAAAAEAAIAAAALAAsAAAAEAAIAAAALAAoAAAADAAMAAAAMAAoAAAAEAAIAAAAMAAsAAAAEAAIAAAAMAAwAAAAEAAIAAAAMAA0AAAAEAAIAAAALAA0AAAAEAAIAAAAKAA0AAAAEAAIAAAAKAAwAAAAEAAIAAAAKAAsAAAAEAAIAAAAJAAsAAAAEAAIAAAAIAAsAAAAEAAIAAAAHAAsAAAADAAMAAAAHAAwAAAAEAAIAAAAGAAwAAAAEAAIAAAAFAAwAAAAEAAIAAAAEAAwAAAAEAAIAAAADAAwAAAAEAAIAAAACAAwAAAAEAAIAAAABAAwAAAAEAAIAAAABAA0AAAAEAAIAAAACAA0AAAAEAAIAAAADAA0AAAAEAAIAAAAEAA0AAAAEAAIAAAAFAA0AAAAEAAIAAAAGAA0AAAAEAAIAAAAHAA0AAAAEAAIAAAAIAA0AAAAEAAIAAAAIAAwAAAAEAAIAAAAJAAwAAAAEAAIAAAAJAA0AAAAEAAIAAAANAA0AAAAEAAIAAAANAAwAAAAEAAIAAAANAAsAAAAEAAIAAAANAAoAAAAEAAIAAAAOAAoAAAAEAAIAAAAOAAsAAAAEAAIAAAAOAAwAAAAEAAIAAAAOAA0AAAAEAAIAAAAPAA0AAAAEAAIAAAAPAAwAAAAEAAIAAAAPAAsAAAAEAAIAAAAPAAoAAAAEAAIAAAAPAAkAAAADAAMAAAAQAAkAAAAEAAIAAAAQAAoAAAAEAAIAAAAQAAsAAAAEAAIAAAAQAAwAAAAEAAIAAAAQAA0AAAAEAAIAAAARAA0AAAAEAAIAAAARAAwAAAAEAAIAAAARAAsAAAAEAAIAAAARAAoAAAAEAAIAAAARAAkAAAAEAAIAAAASAAkAAAAEAAIAAAASAAoAAAAEAAIAAAASAAsAAAAEAAIAAAASAAwAAAAEAAIAAAASAA0AAAAEAAIAAAATAA0AAAAEAAIAAAATAAwAAAAEAAIAAAATAAsAAAAEAAIAAAATAAoAAAAEAAIAAAATAAkAAAAEAAIAAAAUAAkAAAAEAAIAAAAUAAoAAAAEAAIAAAAUAAsAAAAEAAIAAAAUAAwAAAAEAAIAAAAUAA0AAAAEAAIAAAA=")
+tile_set = SubResource("TileSet_xwcet")
