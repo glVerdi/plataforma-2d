@@ -1,4 +1,9 @@
 extends Area2D
 
-func _on_body_entered(body: Node2D) -> void:
-	print("Passou de fase")
+@export var next_level = ""
+
+func _on_body_entered(_body: Node2D) -> void:
+	call_deferred_thread_group("load_next_scene")
+
+func load_next_scene():
+	get_tree().change_scene_to_file("res://scene/" + next_level + ".tscn")

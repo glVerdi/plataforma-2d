@@ -63,7 +63,7 @@ size = Vector2(20, 184)
 metadata/_edit_vertical_guides_ = [621.0]
 
 [node name="Player" parent="." unique_id=302443006 instance=ExtResource("1_e2knd")]
-position = Vector2(21, 153)
+position = Vector2(7, 184)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1824832781]
 
@@ -160,7 +160,8 @@ limit_top = 0
 limit_right = 620
 
 [node name="LevelEnd" parent="." unique_id=803961404 instance=ExtResource("12_64es3")]
-position = Vector2(616, 181)
+position = Vector2(640, 182)
+next_level = "tropic"
 
 [node name="CollisionShape2D" parent="LevelEnd" index="0" unique_id=984623393]
 position = Vector2(0, -80)

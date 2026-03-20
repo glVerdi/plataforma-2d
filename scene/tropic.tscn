@@ -98,10 +98,11 @@ position = Vector2(69, 151)
 limit_right = 520
 
 [node name="Player" parent="." unique_id=302443006 instance=ExtResource("1_bmxgx")]
-position = Vector2(467, 165)
+position = Vector2(7, 169)
 
 [node name="LevelEnd" parent="." unique_id=803961404 instance=ExtResource("10_d18o5")]
-position = Vector2(526, 166)
+position = Vector2(536, 167)
+next_level = "forest"
 
 [node name="CollisionShape2D" parent="LevelEnd" index="0" unique_id=984623393]
 position = Vector2(0, -78)
