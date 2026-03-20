@@ -48,6 +48,13 @@ jump={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Terrain"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enimies"
+2d_physics/layer_4="LevelEnd"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

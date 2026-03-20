@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://chotr1c56af2i" path="res://entities/camera.tscn" id="9_jo4av"]
 [ext_resource type="TileSet" uid="uid://dkhar7p18tlog" path="res://tiles/decoration.tres" id="10_gwku7"]
 [ext_resource type="Texture2D" uid="uid://bjtqrio8yue42" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="10_jxvlp"]
+[ext_resource type="PackedScene" uid="uid://cecj7xl8fu86q" path="res://entities/level_end.tscn" id="12_64es3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwku7"]
 texture = ExtResource("10_jxvlp")
@@ -54,6 +55,9 @@ texture = ExtResource("10_jxvlp")
 
 [sub_resource type="TileSet" id="TileSet_64es3"]
 sources/0 = SubResource("TileSetAtlasSource_gwku7")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64es3"]
+size = Vector2(20, 184)
 
 [node name="Forest" type="Node2D" unique_id=325339008]
 metadata/_edit_vertical_guides_ = [621.0]
@@ -154,3 +158,12 @@ tile_set = ExtResource("10_gwku7")
 position = Vector2(64, 146)
 limit_top = 0
 limit_right = 620
+
+[node name="LevelEnd" parent="." unique_id=803961404 instance=ExtResource("12_64es3")]
+position = Vector2(616, 181)
+
+[node name="CollisionShape2D" parent="LevelEnd" index="0" unique_id=984623393]
+position = Vector2(0, -80)
+shape = SubResource("RectangleShape2D_64es3")
+
+[editable path="LevelEnd"]
