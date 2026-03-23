@@ -13,6 +13,8 @@ enum PlayerState {
 const SPEED = 80.0
 const JUMP_VELOCITY = -300.0
 
+var jump_count = 0
+@export var max_jump_count = 2
 var direction = 0
 var status: PlayerState
 
@@ -48,6 +50,7 @@ func go_to_jump_state():
 	status = PlayerState.jump
 	anim.play("jump")
 	velocity.y = JUMP_VELOCITY
+	jump_count += 1
 	
 func go_to_duck_state():
 	status = PlayerState.duck
@@ -86,8 +89,11 @@ func walk_state():
 		return
 	
 func jump_state():
+	if Input.is_action_just_pressed("jump") && jump_count < max_jump_count:
+		go_to_jump_state()
 	move()
 	if is_on_floor():
+		jump_count = 0
 		if velocity.x == 0:
 			go_to_idle_state()
 		else:
