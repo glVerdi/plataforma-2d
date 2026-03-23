@@ -99,6 +99,7 @@ limit_right = 520
 
 [node name="Player" parent="." unique_id=302443006 instance=ExtResource("1_bmxgx")]
 position = Vector2(7, 169)
+acceleration = 400
 
 [node name="LevelEnd" parent="." unique_id=803961404 instance=ExtResource("10_d18o5")]
 position = Vector2(536, 167)
