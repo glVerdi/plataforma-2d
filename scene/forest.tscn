@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://bjtqrio8yue42" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="10_jxvlp"]
 [ext_resource type="PackedScene" uid="uid://cecj7xl8fu86q" path="res://entities/level_end.tscn" id="12_64es3"]
 [ext_resource type="PackedScene" uid="uid://d1gnf7tfdk2pr" path="res://entities/skeleton.tscn" id="13_kmspj"]
-[ext_resource type="PackedScene" uid="uid://bvo814y066my0" path="res://entities/spinning_bone.tscn" id="14_ja8kk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwku7"]
 texture = ExtResource("10_jxvlp")
@@ -177,8 +176,5 @@ position = Vector2(128, 144)
 
 [node name="Skeleton3" parent="." unique_id=1975525303 instance=ExtResource("13_kmspj")]
 position = Vector2(287, 144)
-
-[node name="SpinningBone" parent="." unique_id=1665433437 instance=ExtResource("14_ja8kk")]
-position = Vector2(104, 140)
 
 [editable path="LevelEnd"]
