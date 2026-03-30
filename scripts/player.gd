@@ -87,6 +87,8 @@ func exit_from_slide_state():
 	set_large_collider()
 	
 func go_to_dead_state():
+	if status == PlayerState.dead:
+		return
 	status = PlayerState.dead
 	anim.play("dead")
 	velocity.x = 0
@@ -214,6 +216,10 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		hit_enemy(area)
 	elif area.is_in_group("LethalArea"):
 		hit_lethal_area()
+		
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("LethalArea"):
+		go_to_dead_state()
 
 func hit_enemy(area: Area2D):
 	if velocity.y > 0:
@@ -222,8 +228,7 @@ func hit_enemy(area: Area2D):
 		go_to_jump_state()
 	else:
 		# Player morre
-		if status != PlayerState.dead:
-			go_to_dead_state()
+		go_to_dead_state()
 	
 func hit_lethal_area():
 	go_to_dead_state()
