@@ -260,7 +260,7 @@ shape = SubResource("CapsuleShape2D_u3f3p")
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_i623q")
 animation = &"swimming"
-frame_progress = 0.49369052
+frame_progress = 0.7489903
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1279633057]
 visible = false
@@ -289,4 +289,5 @@ target_position = Vector2(7, 0)
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]
