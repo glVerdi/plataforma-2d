@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b713f3ppwljrq" path="res://sprites/Seasonal Tilesets/5 - Misc. universal tiles/distant-water.png" id="9_ytc0w"]
 [ext_resource type="PackedScene" uid="uid://cecj7xl8fu86q" path="res://entities/level_end.tscn" id="10_d18o5"]
 [ext_resource type="PackedScene" uid="uid://d1gnf7tfdk2pr" path="res://entities/skeleton.tscn" id="11_t8vtq"]
+[ext_resource type="PackedScene" uid="uid://qn1d7crua6xw" path="res://entities/moving_plataform.tscn" id="14_xflqb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t8vtq"]
 animations = [{
@@ -132,4 +133,20 @@ shape = SubResource("RectangleShape2D_d18o5")
 [node name="Skeleton" parent="." unique_id=1027319150 instance=ExtResource("11_t8vtq")]
 position = Vector2(239, 159)
 
+[node name="MovingPlataform" parent="." unique_id=1726443674 instance=ExtResource("14_xflqb")]
+position = Vector2(58, 153)
+time = 3
+
+[node name="Target" parent="MovingPlataform" index="1" unique_id=1239143692]
+position = Vector2(0, -145)
+
+[node name="MovingPlataform2" parent="." unique_id=1381027296 instance=ExtResource("14_xflqb")]
+position = Vector2(262, 39)
+time = 2
+
+[node name="Target" parent="MovingPlataform2" index="1" unique_id=1239143692]
+position = Vector2(198, 0)
+
 [editable path="LevelEnd"]
+[editable path="MovingPlataform"]
+[editable path="MovingPlataform2"]
