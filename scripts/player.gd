@@ -19,7 +19,7 @@ enum PlayerState {
 @onready var right_wall_detector: RayCast2D = $RightWallDetector
 @onready var reload_timer: Timer = $ReloadTimer
 
-@export var max_speed = 180.0
+@export var max_speed = 100.0
 @export var acceleration = 400
 @export var deceleration = 400
 @export var slide_deceleration = 100
@@ -32,7 +32,7 @@ enum PlayerState {
 const JUMP_VELOCITY = -300.0
 
 var jump_count = 0
-@export var max_jump_count = 2
+@export var max_jump_count = 1
 var direction = 0
 var status: PlayerState
 
