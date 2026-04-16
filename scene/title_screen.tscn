@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://83med2k75va1"]
+
+[ext_resource type="Texture2D" uid="uid://cn24tke3kt3w4" path="res://sprites/Seasonal Tilesets/4 - Winter World/Background parts/_Complete_static_BG_(288 x 208).png" id="1_2fir4"]
+[ext_resource type="Script" uid="uid://dggvtamsr4pcx" path="res://scripts/title_screen.gd" id="1_j6oad"]
+[ext_resource type="Texture2D" uid="uid://cb24rnsps1aam" path="res://sprites/Seasonal Tilesets/5 - Misc. universal tiles/game_logo.png" id="2_wxbcn"]
+[ext_resource type="Texture2D" uid="uid://dmob8hygfun2g" path="res://sprites/1 - Penguin/Jump (16 x 16).png" id="3_j6oad"]
+[ext_resource type="Theme" uid="uid://xhuonprpxe4" path="res://sprites/screen.tres" id="3_wxbcn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j6oad"]
+
+[node name="TitleScreen" type="Control" unique_id=109682519]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j6oad")
+
+[node name="background" type="TextureRect" parent="." unique_id=817257578]
+layout_mode = 0
+offset_right = 408.0
+offset_bottom = 208.0
+texture = ExtResource("1_2fir4")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1590037365]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1788624095]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1682590636]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Game_logo" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=762755949]
+layout_mode = 2
+texture = ExtResource("2_wxbcn")
+expand_mode = 5
+
+[node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=844852922]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_wxbcn")
+text = "START"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=580235998]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_j6oad")
+
+[node name="Credits_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=749328215]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_wxbcn")
+text = "CREDITS
+"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1384856881]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_j6oad")
+
+[node name="Quite_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1713096905]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_wxbcn")
+text = "QUITE GAME
+"
+
+[node name="Pingu" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1167890394]
+layout_mode = 2
+texture = ExtResource("3_j6oad")
+expand_mode = 2
+flip_h = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Start_Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Credits_Button" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quite_Button" to="." method="_on_quite_button_pressed"]
