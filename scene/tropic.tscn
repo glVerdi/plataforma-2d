@@ -98,7 +98,7 @@ centered = false
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="ParallaxBackground/2 - Water" unique_id=395908986]
 texture_repeat = 2
-position = Vector2(576, 0)
+position = Vector2(582, 6)
 sprite_frames = SubResource("SpriteFrames_t8vtq")
 autoplay = "default"
 centered = false
@@ -123,6 +123,7 @@ shape = SubResource("RectangleShape2D_d18o5")
 position = Vector2(239, 159)
 
 [node name="Skeleton2" parent="." unique_id=1083014297 instance=ExtResource("11_t8vtq")]
+z_index = 1
 position = Vector2(717, 127)
 
 [node name="Skeleton3" parent="." unique_id=1023115613 instance=ExtResource("11_t8vtq")]
