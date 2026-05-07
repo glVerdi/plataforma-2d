@@ -2,13 +2,13 @@ extends CharacterBody2D
 
 enum PlayerState {
 	idle,
-	walk, 
+	walk,
 	jump,
 	fall,
 	duck,
-	#slide,
+	slide,
 	wall,
-	#swimming,
+	swimming,
 	dead
 }
 
@@ -17,6 +17,7 @@ enum PlayerState {
 @onready var hitbox_collision_shape: CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var left_wall_detector: RayCast2D = $LeftWallDetector
 @onready var right_wall_detector: RayCast2D = $RightWallDetector
+
 @onready var reload_timer: Timer = $ReloadTimer
 
 @export var max_speed = 180.0
@@ -35,7 +36,7 @@ var jump_count = 0
 @export var max_jump_count = 2
 var direction = 0
 var status: PlayerState
-
+		
 func _ready() -> void:
 	go_to_idle_state()
 
@@ -52,25 +53,25 @@ func _physics_process(delta: float) -> void:
 			fall_state(delta)
 		PlayerState.duck:
 			duck_state(delta)
-		#PlayerState.slide:
-			#slide_state(delta)
+		PlayerState.slide:
+			slide_state(delta)
 		PlayerState.wall:
 			wall_state(delta)
+		PlayerState.swimming:
+			swimming_state(delta)
 		PlayerState.dead:
 			dead_state(delta)
-		#PlayerState.swimming:
-			#swimming_state(delta)
 			
 	move_and_slide()
 
 func go_to_idle_state():
 	status = PlayerState.idle
 	anim.play("idle")
-
+	
 func go_to_walk_state():
 	status = PlayerState.walk
 	anim.play("walk")
-	
+
 func go_to_jump_state():
 	status = PlayerState.jump
 	anim.play("jump")
@@ -89,13 +90,13 @@ func go_to_duck_state():
 func exit_from_duck_state():
 	set_large_collider()
 	
-#func go_to_slide_state():
-	#status = PlayerState.slide
-	#anim.play("slide")
-	#set_small_collider()
+func go_to_slide_state():
+	status = PlayerState.slide
+	anim.play("slide")
+	set_small_collider()
 	
-#func exit_from_slide_state():
-	#set_large_collider()
+func exit_from_slide_state():
+	set_large_collider()
 	
 func go_to_wall_state():
 	status = PlayerState.wall
@@ -103,14 +104,15 @@ func go_to_wall_state():
 	velocity = Vector2.ZERO
 	jump_count = 0
 	
-#func go_to_swimming_state():
-	#status = PlayerState.swimming
-	#anim.play("swimming")
-	#velocity.y = min(velocity.y, 150)
+func go_to_swimming_state():
+	status = PlayerState.swimming
+	anim.play("swimming")
+	velocity.y = min(velocity.y, 150)
 	
 func go_to_dead_state():
 	if status == PlayerState.dead:
 		return
+	
 	status = PlayerState.dead
 	anim.play("dead")
 	velocity.x = 0
@@ -118,8 +120,10 @@ func go_to_dead_state():
 
 func idle_state(delta):
 	apply_gravity(delta)
-	
 	move(delta)
+	if velocity.x != 0:
+		go_to_walk_state()
+		return
 		
 	if Input.is_action_just_pressed("jump"):
 		go_to_jump_state()
@@ -128,14 +132,9 @@ func idle_state(delta):
 	if Input.is_action_pressed("duck"):
 		go_to_duck_state()
 		return
-		
-	if velocity.x != 0:
-		go_to_walk_state()
-		return
 	
 func walk_state(delta):
 	apply_gravity(delta)
-	
 	move(delta)
 	if velocity.x == 0:
 		go_to_idle_state()
@@ -146,30 +145,28 @@ func walk_state(delta):
 		return
 		
 	if Input.is_action_just_pressed("duck"):
-		go_to_duck_state()
+		go_to_slide_state()
 		return
 		
 	if !is_on_floor():
 		jump_count += 1
 		go_to_fall_state()
 		return
-	
+		
 func jump_state(delta):
 	apply_gravity(delta)
-	
 	move(delta)
 	
 	if Input.is_action_just_pressed("jump") && can_jump():
 		go_to_jump_state()
 		return
-		
+	
 	if velocity.y > 0:
 		go_to_fall_state()
 		return
 		
 func fall_state(delta):
 	apply_gravity(delta)
-	
 	move(delta)
 	
 	if Input.is_action_just_pressed("jump") && can_jump():
@@ -190,27 +187,25 @@ func fall_state(delta):
 		
 func duck_state(delta):
 	apply_gravity(delta)
-	
 	update_direction()
 	if Input.is_action_just_released("duck"):
-		#exit_from_slide_state()
+		exit_from_duck_state()
 		go_to_idle_state()
 		return
 		
-#func slide_state(delta):
-	#apply_gravity(delta)
+func slide_state(delta):
+	apply_gravity(delta)
+	velocity.x = move_toward(velocity.x, 0, slide_deceleration * delta)
 	
-	#velocity.x = move_toward(velocity.x, 0, slide_deceleration * delta)
-	
-	#if Input.is_action_just_released("duck"):
-		#exit_from_duck_state()
-		#go_to_walk_state()
-		#return
+	if Input.is_action_just_released("duck"):
+		exit_from_slide_state()
+		go_to_walk_state()
+		return
 		
-	#if velocity.x == 0:
-		#exit_from_slide_state()
-		#go_to_duck_state()
-		#return
+	if velocity.x == 0:
+		exit_from_slide_state()
+		go_to_duck_state()
+		return
 		
 func wall_state(delta):
 	
@@ -235,20 +230,20 @@ func wall_state(delta):
 		go_to_jump_state()
 		return
 		
-#func swimming_state(delta):
-	#update_direction()
+func swimming_state(delta):
+	update_direction()
 	
-	#if direction != 0:
-		#velocity.x = move_toward(velocity.x, water_max_speed * direction, water_acceleration * delta)
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, water_acceleration * delta)
+	if direction:
+		velocity.x = move_toward(velocity.x, water_max_speed * direction, water_acceleration * delta)
+	else:
+		velocity.x = move_toward(velocity.x, 0, water_acceleration * delta)
 		
-	#velocity.y += water_acceleration * delta
-	#velocity.y = min(velocity.y, water_max_speed)
+	velocity.y += water_acceleration * delta
+	velocity.y = min(velocity.y, water_max_speed)
 	
-	#if Input.is_action_just_pressed("jump"):
-		#velocity.y = water_jump_force
-	
+	if Input.is_action_just_pressed("jump"):
+		velocity.y = water_jump_force
+		
 func dead_state(delta):
 	apply_gravity(delta)
 
@@ -259,11 +254,11 @@ func move(delta):
 		velocity.x = move_toward(velocity.x, direction * max_speed, acceleration * delta)
 	else:
 		velocity.x = move_toward(velocity.x, 0, deceleration * delta)
-		
+	
 func apply_gravity(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
+	
 func update_direction():
 	direction = Input.get_axis("left", "right")
 	
@@ -274,7 +269,7 @@ func update_direction():
 
 func can_jump() -> bool:
 	return jump_count < max_jump_count
-	
+
 func set_small_collider():
 	collision_shape.shape.radius = 5
 	collision_shape.shape.height = 10
@@ -300,8 +295,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("LethalArea"):
 		go_to_dead_state()
-	#elif body.is_in_group("Water"):
-		#go_to_swimming_state()
+	elif body.is_in_group("Water"):
+		go_to_swimming_state()
 
 func hit_enemy(area: Area2D):
 	if velocity.y > 0:
@@ -309,7 +304,7 @@ func hit_enemy(area: Area2D):
 		area.get_parent().take_damage()
 		go_to_jump_state()
 	else:
-		# Player morre
+		# player morre
 		go_to_dead_state()
 	
 func hit_lethal_area():
