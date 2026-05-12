@@ -72,8 +72,10 @@ func walk_state(_delta):
 		direction *= -1
 		
 	if player_detector.is_colliding():
-		go_to_attack_state()
-		return
+		var collider = player_detector.get_collider()
+		if collider.collision_layer == 2:
+			go_to_attack_state()
+			return
 		
 func attack_state(_delta):
 	if anim.frame == 2 && can_throw:
