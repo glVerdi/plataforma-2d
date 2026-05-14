@@ -20,10 +20,12 @@ const JUMP_VELOCITY = -400.0
 
 var status: SkeletonState
 
-var direction = 1
+@export var direction = 1
 var can_throw = true
 
 func _ready() -> void:
+	if direction == -1:
+		scale.x = -1
 	go_to_walk_state()
 
 func _physics_process(delta: float) -> void:
