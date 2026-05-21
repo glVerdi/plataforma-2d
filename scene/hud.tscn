@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://0bpbsw2prre"]
+
+[ext_resource type="Script" uid="uid://vxekbu46rs6i" path="res://scripts/hud.gd" id="1_o8u2p"]
+[ext_resource type="Texture2D" uid="uid://bm7ova7gqtdxa" path="res://sprites/HealthUI.png" id="2_pvgpj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhyt6"]
+atlas = ExtResource("2_pvgpj")
+region = Rect2(0, 44, 11, 11)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry2h7"]
+atlas = ExtResource("2_pvgpj")
+region = Rect2(22, 66, 11, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lky30"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhyt6")
+}],
+"loop": false,
+"name": &"Heart",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ry2h7")
+}],
+"loop": true,
+"name": &"noHeart",
+"speed": 5.0
+}]
+
+[node name="HUD" type="CanvasLayer" unique_id=1891902138]
+script = ExtResource("1_o8u2p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=737803166]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+
+[node name="Heart" type="AnimatedSprite2D" parent="HBoxContainer" unique_id=2118382052]
+position = Vector2(6.5, 6)
+sprite_frames = SubResource("SpriteFrames_lky30")
+animation = &"noHeart"
+
+[node name="Heart3" type="AnimatedSprite2D" parent="HBoxContainer" unique_id=1205042793]
+position = Vector2(16, 6)
+sprite_frames = SubResource("SpriteFrames_lky30")
+animation = &"noHeart"
+
+[node name="Heart2" type="AnimatedSprite2D" parent="HBoxContainer" unique_id=1583642864]
+position = Vector2(25.5, 6)
+sprite_frames = SubResource("SpriteFrames_lky30")
+animation = &"noHeart"

@@ -30,6 +30,9 @@ enum PlayerState {
 @export var water_acceleration = 200
 @export var water_jump_force = -100
 
+# CORREÇÃO: Removemos a variável local que resetava a vida. 
+# Agora usamos o GameManager global.
+
 const JUMP_VELOCITY = -300.0
 
 var jump_count = 0
@@ -38,6 +41,9 @@ var direction = 0
 var status: PlayerState
 		
 func _ready() -> void:
+	# CORREÇÃO: Atualiza a interface assim que o player nasce na fase,
+	# pegando a vida que sobrou da fase anterior salva no GameManager.
+	update_ui()
 	go_to_idle_state()
 
 func _physics_process(delta: float) -> void:
@@ -299,18 +305,46 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		go_to_swimming_state()
 
 func hit_enemy(area: Area2D):
+	if status == PlayerState.dead:
+		return
+
+	if area.has_method("set_direction"):
+		take_damage(1)
+		return
+
 	if velocity.y > 0:
-		# inimigo morre
-		area.get_parent().take_damage()
+		if area.get_parent().has_method("take_damage"):
+			area.get_parent().take_damage()
 		go_to_jump_state()
 	else:
-		# player morre
-		go_to_dead_state()
+		take_damage(1)
 	
 func hit_lethal_area():
 	go_to_dead_state()
 
+# CORREÇÃO: Função modificada para usar o Autoload GameManager
+func take_damage(amount: int):
+	# Reduz a vida global no GameManager
+	GameManeger.player_health -= amount
+	
+	# DISPARA O ALARME: Ativa o sinal para o HUD atualizar os corações na hora!
+	GameManeger.health_changed.emit()
+	
+	if GameManeger.player_health <= 0:
+		go_to_dead_state()
+	else:
+		velocity.y = -150 # Pequeno pulo de dano
+		velocity.x = -max_speed if anim.flip_h == false else max_speed
+
+func update_ui():
+	var hud = get_tree().get_first_node_in_group("HUD")
+	if hud and hud.has_method("update_hearts"):
+		hud.update_hearts()
+
+# CORREÇÃO: Reseta as vidas globais para 3 quando dá Game Over real
 func _on_reload_timer_timeout() -> void:
+	if GameManeger.player_health <= 0:
+		GameManeger.reset_game()
 	get_tree().reload_current_scene()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
