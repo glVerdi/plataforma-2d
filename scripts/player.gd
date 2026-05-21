@@ -341,10 +341,8 @@ func update_ui():
 	if hud and hud.has_method("update_hearts"):
 		hud.update_hearts()
 
-# CORREÇÃO: Reseta as vidas globais para 3 quando dá Game Over real
 func _on_reload_timer_timeout() -> void:
-	if GameManeger.player_health <= 0:
-		GameManeger.reset_game()
+	GameManeger.reset_game()
 	get_tree().reload_current_scene()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
