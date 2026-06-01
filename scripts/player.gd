@@ -20,18 +20,19 @@ enum PlayerState {
 
 @onready var reload_timer: Timer = $ReloadTimer
 
-@export var max_speed = 180.0
-@export var acceleration = 400
-@export var deceleration = 400
-@export var slide_deceleration = 100
+@export var max_speed = 125
+@export var acceleration = 200
+@export var deceleration = 300
+@export var slide_deceleration = 0
 @export var wall_acceleration = 40
 @export var wall_jump_velocity = 240
 @export var water_max_speed = 100
 @export var water_acceleration = 200
 @export var water_jump_force = -100
+@export var invincibility_time: float = 1.0
 
-# CORREÇÃO: Removemos a variável local que resetava a vida. 
-# Agora usamos o GameManager global.
+var is_invincible: bool = false
+var invincibility_timer: Timer
 
 const JUMP_VELOCITY = -300.0
 
@@ -41,12 +42,19 @@ var direction = 0
 var status: PlayerState
 		
 func _ready() -> void:
-	# CORREÇÃO: Atualiza a interface assim que o player nasce na fase,
-	# pegando a vida que sobrou da fase anterior salva no GameManager.
 	update_ui()
 	go_to_idle_state()
+	invincibility_timer = Timer.new()
+	invincibility_timer.one_shot = true
+	invincibility_timer.wait_time = invincibility_time
+	invincibility_timer.timeout.connect(_on_invincibility_timeout)
+	add_child(invincibility_timer)
 
 func _physics_process(delta: float) -> void:
+	if is_invincible:
+		anim.visible = Engine.get_frames_drawn() % 6 < 3
+	else:
+		anim.visible = true
 	
 	match status:
 		PlayerState.idle:
@@ -232,7 +240,8 @@ func wall_state(delta):
 		return
 		
 	if Input.is_action_just_pressed("jump"):
-		velocity.x = wall_jump_velocity * direction
+		#velocity.x = wall_jump_velocity * direction
+		velocity.x = 0
 		go_to_jump_state()
 		return
 		
@@ -315,6 +324,7 @@ func hit_enemy(area: Area2D):
 	if velocity.y > 0:
 		if area.get_parent().has_method("take_damage"):
 			area.get_parent().take_damage()
+		jump_count = 0
 		go_to_jump_state()
 	else:
 		take_damage(1)
@@ -322,18 +332,19 @@ func hit_enemy(area: Area2D):
 func hit_lethal_area():
 	go_to_dead_state()
 
-# CORREÇÃO: Função modificada para usar o Autoload GameManager
 func take_damage(amount: int):
-	# Reduz a vida global no GameManager
+	if is_invincible:
+		return
+		
 	GameManeger.player_health -= amount
-	
-	# DISPARA O ALARME: Ativa o sinal para o HUD atualizar os corações na hora!
 	GameManeger.health_changed.emit()
 	
 	if GameManeger.player_health <= 0:
 		go_to_dead_state()
 	else:
-		velocity.y = -150 # Pequeno pulo de dano
+		is_invincible = true
+		invincibility_timer.start()
+		velocity.y = -150
 		velocity.x = -max_speed if anim.flip_h == false else max_speed
 
 func update_ui():
@@ -349,3 +360,7 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Water"):
 		jump_count = 0
 		go_to_jump_state()
+		
+func _on_invincibility_timeout():
+	is_invincible = false
+	anim.visible = true # Garante que ele termine o estado visível

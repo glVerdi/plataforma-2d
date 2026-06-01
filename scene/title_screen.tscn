@@ -17,6 +17,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j6oad")
 
+[node name="CreditsDialog" type="AcceptDialog" parent="." unique_id=1153527231]
+title = "Credits"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CreditsDialog" unique_id=2003595663]
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Autores: Caio Bernardes, Gabriel Verdi e Pedro Arthur
+
+Artes do Jogo:
+https://grafxkid.itch.io/
+https://swooshwhoosh.itch.io/heartsui"
+
 [node name="background" type="TextureRect" parent="." unique_id=817257578]
 layout_mode = 0
 offset_right = 408.0
@@ -74,7 +86,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_j6oad")
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_wxbcn")
-text = "QUITE GAME
+text = "QUIT GAME
 "
 
 [node name="Pingu" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1167890394]
@@ -83,6 +95,7 @@ texture = ExtResource("3_j6oad")
 expand_mode = 2
 flip_h = true
 
+[connection signal="meta_clicked" from="CreditsDialog/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Start_Button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Credits_Button" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quite_Button" to="." method="_on_quite_button_pressed"]
