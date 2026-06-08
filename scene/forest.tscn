@@ -197,12 +197,12 @@ position = Vector2(-11, 99)
 shape = SubResource("RectangleShape2D_ja8kk")
 
 [node name="BrokenBlock" parent="." unique_id=1518220603 instance=ExtResource("15_boiax")]
-position = Vector2(61, 147)
+position = Vector2(195, 154)
 
 [node name="BrokenBlock2" parent="." unique_id=1557464399 instance=ExtResource("15_boiax")]
-position = Vector2(94, 119)
+position = Vector2(226, 148)
 
 [node name="BrokenBlock3" parent="." unique_id=1778601461 instance=ExtResource("15_boiax")]
-position = Vector2(133, 91)
+position = Vector2(255, 138)
 
 [editable path="LevelEnd"]
