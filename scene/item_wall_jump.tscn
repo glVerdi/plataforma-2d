@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c55jrgt0y051g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7yeq3"]
+
+[node name="Area2DItemDoubleJump" type="Area2D" unique_id=492918117]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=603099210]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1497717080]
+shape = SubResource("CircleShape2D_7yeq3")

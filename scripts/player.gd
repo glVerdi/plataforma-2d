@@ -51,6 +51,8 @@ func _ready() -> void:
 	add_child(invincibility_timer)
 
 func _physics_process(delta: float) -> void:
+	max_jump_count = 2 if GameManeger.has_double_jump else 1
+	
 	if is_invincible:
 		anim.visible = Engine.get_frames_drawn() % 6 < 3
 	else:
@@ -194,10 +196,10 @@ func fall_state(delta):
 		else:
 			go_to_walk_state()
 		return
-		
-	if (left_wall_detector.is_colliding() or right_wall_detector.is_colliding()) && is_on_wall():
-		go_to_wall_state()
-		return
+	if GameManeger.has_wall_jump:
+		if (left_wall_detector.is_colliding() or right_wall_detector.is_colliding()) && is_on_wall():
+			go_to_wall_state()
+			return
 		
 func duck_state(delta):
 	apply_gravity(delta)
@@ -283,6 +285,8 @@ func update_direction():
 		anim.flip_h = false
 
 func can_jump() -> bool:
+	if jump_count == 1 and not GameManeger.has_double_jump:
+		return false
 	return jump_count < max_jump_count
 
 func set_small_collider():

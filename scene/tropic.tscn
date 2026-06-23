@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://chotr1c56af2i" path="res://entities/camera.tscn" id="9_34ia6"]
 [ext_resource type="PackedScene" uid="uid://cecj7xl8fu86q" path="res://entities/level_end.tscn" id="10_d18o5"]
 [ext_resource type="PackedScene" uid="uid://d1gnf7tfdk2pr" path="res://entities/skeleton.tscn" id="11_t8vtq"]
+[ext_resource type="PackedScene" uid="uid://ccyvsps2lilbk" path="res://scene/area_2d_item_wall_jump.tscn" id="14_xflqb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_t8vtq"]
 animations = [{
@@ -180,5 +181,8 @@ direction = -1
 
 [node name="Skeleton15" parent="." unique_id=1018009278 instance=ExtResource("11_t8vtq")]
 position = Vector2(2791, 159)
+
+[node name="Area2D" parent="." unique_id=836124885 instance=ExtResource("14_xflqb")]
+position = Vector2(222, 112)
 
 [editable path="LevelEnd"]
