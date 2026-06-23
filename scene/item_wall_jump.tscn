@@ -1,10 +1,15 @@
-[gd_scene format=3 uid="uid://c55jrgt0y051g"]
+[gd_scene format=3 uid="uid://bxk83kru5qd55"]
+
+[ext_resource type="Script" uid="uid://cnktwltt1ls3x" path="res://scripts/item_wall_jump.gd" id="1_lgxlo"]
+[ext_resource type="Texture2D" uid="uid://fkc4ew7fu0mu" path="res://sprites/icons/1_32x32/finger_guard_glove/wuxia_finger_guard_glove_natural_wood_32x32.png" id="1_vk4j2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7yeq3"]
 
 [node name="Area2DItemDoubleJump" type="Area2D" unique_id=492918117]
+script = ExtResource("1_lgxlo")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=603099210]
+texture = ExtResource("1_vk4j2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1497717080]
 shape = SubResource("CircleShape2D_7yeq3")

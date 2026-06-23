@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cecj7xl8fu86q" path="res://entities/level_end.tscn" id="12_64es3"]
 [ext_resource type="PackedScene" uid="uid://d1gnf7tfdk2pr" path="res://entities/skeleton.tscn" id="13_kmspj"]
 [ext_resource type="PackedScene" uid="uid://0m50mjknmny4" path="res://entities/broken_block.tscn" id="15_boiax"]
+[ext_resource type="PackedScene" uid="uid://c55jrgt0y051g" path="res://scene/area_2d_item_double_jump.tscn" id="18_cwbpd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gwku7"]
 texture = ExtResource("10_jxvlp")
@@ -222,5 +223,8 @@ position = Vector2(507, 147)
 
 [node name="BrokenBlock3" parent="." unique_id=1778601461 instance=ExtResource("15_boiax")]
 position = Vector2(500, 151)
+
+[node name="Area2D" parent="." unique_id=836124885 instance=ExtResource("18_cwbpd")]
+position = Vector2(85, 178)
 
 [editable path="LevelEnd"]
