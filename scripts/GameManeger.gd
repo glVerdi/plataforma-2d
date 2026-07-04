@@ -11,3 +11,5 @@ signal health_changed
 func reset_game():
 	player_health = max_health
 	health_changed.emit()
+	has_double_jump = false
+	has_wall_jump = false

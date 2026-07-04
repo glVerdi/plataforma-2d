@@ -196,11 +196,17 @@ func fall_state(delta):
 		else:
 			go_to_walk_state()
 		return
+		
 	if GameManeger.has_wall_jump:
 		if (left_wall_detector.is_colliding() or right_wall_detector.is_colliding()) && is_on_wall():
+			
+			var objeto_parede = left_wall_detector.get_collider() if left_wall_detector.is_colliding() else right_wall_detector.get_collider()
+			
+			if objeto_parede and "limit" in objeto_parede.name.to_lower():
+				return
+				
 			go_to_wall_state()
-			return
-		
+			return		
 func duck_state(delta):
 	apply_gravity(delta)
 	update_direction()
