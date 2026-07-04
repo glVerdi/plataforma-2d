@@ -11,5 +11,11 @@ signal health_changed
 func reset_game():
 	player_health = max_health
 	health_changed.emit()
-	has_double_jump = false
-	has_wall_jump = false
+	
+	var cena_atual = get_tree().current_scene.scene_file_path.to_lower()
+	
+	if "forest" in cena_atual:
+		has_wall_jump = false
+	else:
+		has_double_jump = false
+		has_wall_jump = false
