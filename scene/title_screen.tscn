@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://dmob8hygfun2g" path="res://sprites/1 - Penguin/Jump (16 x 16).png" id="3_j6oad"]
 [ext_resource type="Theme" uid="uid://xhuonprpxe4" path="res://sprites/screen.tres" id="3_wxbcn"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j6oad"]
-
 [node name="TitleScreen" type="Control" unique_id=109682519]
 layout_mode = 3
 anchors_preset = 15
@@ -62,27 +60,22 @@ texture = ExtResource("2_wxbcn")
 expand_mode = 5
 
 [node name="Start_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=844852922]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_wxbcn")
 text = "START"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=580235998]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_j6oad")
-
 [node name="Credits_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=749328215]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_wxbcn")
 text = "CREDITS
 "
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1384856881]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_j6oad")
-
 [node name="Quite_Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1713096905]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("3_wxbcn")
