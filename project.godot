@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Plataforma2D"
-run/main_scene="uid://83med2k75va1"
+run/main_scene="uid://c71m2nqa56ajs"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
